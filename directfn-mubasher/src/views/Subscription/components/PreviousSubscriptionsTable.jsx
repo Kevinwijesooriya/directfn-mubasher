@@ -11,14 +11,29 @@ function createData(market, packageName, subStart, subEnd) {
   return { market, packageName, subStart, subEnd };
 }
 
-const rows = [
+const rowsEN = [
   createData("TDWL", "Pro 11", "15/1/2023", "15/7/2023"),
   createData("TDWL", "Pro 11", "15/1/2023", "15/7/2023"),
   createData("TDWL", "Pro 11", "15/1/2023", "15/7/2023"),
   createData("TDWL", "Pro 11", "15/1/2023", "15/7/2023"),
 ];
+const rowsAR = [
+  createData("تداول", "برو 11 لايت", "15/1/2023", "15/7/2023"),
+  createData("خليجي", "برو 11 ستاندرد", "15/1/2023", "15/7/2023"),
+  createData("تداول", "برو 11 بريميوم", "15/1/2023", "15/7/2023"),
+  createData("تداول", "برو 11 لايت", "15/1/2023", "15/7/2023"),
+];
 
-export default function PreviousSubscriptionsTable() {
+export default function PreviousSubscriptionsTable(props) {
+  const { language } = props;
+  const [rows, setRows] = React.useState([]);
+  React.useEffect(() => {
+    if (language === "en") {
+      setRows(rowsEN);
+    } else if (language === "ar") {
+      setRows(rowsAR);
+    }
+  }, [language]);
   return (
     <TableContainer
       component={Paper}
@@ -27,10 +42,18 @@ export default function PreviousSubscriptionsTable() {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow sx={{ borderBottom: 1 }}>
-            <TableCell align="center">Market</TableCell>
-            <TableCell align="center">Package</TableCell>
-            <TableCell align="center">Sub Start</TableCell>
-            <TableCell align="center">Sub End</TableCell>
+            <TableCell align="center">
+              {language === "en" ? "Market" : "السوق"}
+            </TableCell>
+            <TableCell align="center">
+              {language === "en" ? "Package" : "نوع الاشتراك"}
+            </TableCell>
+            <TableCell align="center">
+              {language === "en" ? "Sub Start" : "تاريخ بداية الاشتراك"}
+            </TableCell>
+            <TableCell align="center">
+              {language === "en" ? "Sub End" : "تاريخ نهاية الاشتراك"}
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

@@ -11,9 +11,19 @@ function createData(market, packageName, subStart, subEnd) {
   return { market, packageName, subStart, subEnd };
 }
 
-const rows = [createData("TDWL", "Pro 11", "15/1/2023", "15/7/2023")];
+const rowsEN = [createData("TDWL", "Pro 11", "15/1/2023", "15/7/2023")];
+const rowsAR = [createData("تداول", "برو 11 لايت", "15/1/2023", "15/7/2023")];
 
-export default function CurrentSubscriptionsTable() {
+export default function CurrentSubscriptionsTable(props) {
+  const { language } = props;
+  const [rows, setRows] = React.useState([]);
+  React.useEffect(() => {
+    if (language === "en") {
+      setRows(rowsEN);
+    } else if (language === "ar") {
+      setRows(rowsAR);
+    }
+  }, [language]);
   return (
     <TableContainer
       component={Paper}
@@ -22,10 +32,18 @@ export default function CurrentSubscriptionsTable() {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="center">Market</TableCell>
-            <TableCell align="center">Package</TableCell>
-            <TableCell align="center">Sub Start</TableCell>
-            <TableCell align="center">Sub End</TableCell>
+            <TableCell align="center">
+              {language === "en" ? "Market" : "السوق"}
+            </TableCell>
+            <TableCell align="center">
+              {language === "en" ? "Package" : "نوع الاشتراك"}
+            </TableCell>
+            <TableCell align="center">
+              {language === "en" ? "Sub Start" : "تاريخ بداية الاشتراك"}
+            </TableCell>
+            <TableCell align="center">
+              {language === "en" ? "Sub End" : "تاريخ نهاية الاشتراك"}
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
