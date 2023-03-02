@@ -8,9 +8,12 @@ import {
   ListItem,
   ListItemAvatar,
   Box,
+  ListItemText,
 } from "@mui/material";
 import dfnLogo from "../../assets/images/dfnLogo.png";
 import crossPlatform from "../../assets/images/crossPlatform.png";
+import { Link } from "react-router-dom";
+import { CenterAlignedGrid, SpaceBetweenCenterAlignedGrid } from "./styles";
 
 const ProductSelector = () => {
   const itemsDFNPro = [
@@ -30,28 +33,11 @@ const ProductSelector = () => {
   ];
   return (
     <Grid container sx={{ height: "100vh" }} spacing={4}>
-      <Grid
-        item
-        xs={12}
-        md={6}
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        sx={{ height: "30vh" }}
-      >
+      <CenterAlignedGrid item xs={12} md={6} sx={{ height: "30vh" }}>
         <img alt="dfnLogo" src={crossPlatform} width={300} />
-      </Grid>
+      </CenterAlignedGrid>
 
-      <Grid
-        item
-        xs={12}
-        md={6}
-        display="flex"
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="center"
-        sx={{ height: "35vh" }}
-      >
+      <CenterAlignedGrid item xs={12} md={6} sx={{ height: "35vh" }}>
         <img alt="dfnLogo" src={dfnLogo} width={250} />
         <Box
           border={1}
@@ -65,16 +51,12 @@ const ProductSelector = () => {
             Select Product/إختيار المنتج
           </Typography>
         </Box>
-      </Grid>
+      </CenterAlignedGrid>
 
-      <Grid
+      <SpaceBetweenCenterAlignedGrid
         item
         xs={12}
         md={4}
-        display="flex"
-        flexDirection="column"
-        justifyContent="space-between"
-        alignItems="center"
         sx={{ height: "60vh" }}
       >
         <Typography
@@ -98,24 +80,25 @@ const ProductSelector = () => {
             {itemsDFNPro.map((item) => (
               <ListItem key={item}>
                 <ListItemAvatar>•</ListItemAvatar>
-                {item}
+                <ListItemText primary={item} />
               </ListItem>
             ))}
           </List>
         </Box>
-        <Button variant="outlined" style={{ border: "2px solid" }}>
+        <Button
+          variant="outlined"
+          style={{ border: "2px solid" }}
+          component={Link}
+          to="/subscription/package"
+        >
           Click Here
         </Button>
-      </Grid>
+      </SpaceBetweenCenterAlignedGrid>
 
-      <Grid
+      <SpaceBetweenCenterAlignedGrid
         item
         xs={12}
         md={4}
-        display="flex"
-        flexDirection="column"
-        justifyContent="space-between"
-        alignItems="center"
         sx={{ height: "60vh" }}
       >
         <Typography
@@ -139,24 +122,25 @@ const ProductSelector = () => {
             {itemsDFNPlus.map((item) => (
               <ListItem key={item}>
                 <ListItemAvatar>•</ListItemAvatar>
-                {item}
+                <ListItemText primary={item} />
               </ListItem>
             ))}
           </List>
         </Box>
-        <Button variant="outlined" style={{ border: "2px solid" }}>
+        <Button
+          variant="outlined"
+          style={{ border: "2px solid" }}
+          component={Link}
+          to="/subscription/package"
+        >
           Click Here
         </Button>
-      </Grid>
+      </SpaceBetweenCenterAlignedGrid>
 
-      <Grid
+      <SpaceBetweenCenterAlignedGrid
         item
         xs={12}
         md={4}
-        display="flex"
-        flexDirection="column"
-        justifyContent="space-between"
-        alignItems="center"
         sx={{ height: "60vh" }}
       >
         <Typography
@@ -180,15 +164,20 @@ const ProductSelector = () => {
             {itemsDFNSD.map((item) => (
               <ListItem key={item}>
                 <ListItemAvatar>•</ListItemAvatar>
-                {item}
+                <ListItemText primary={item} />
               </ListItem>
             ))}
           </List>
         </Box>
-        <Button variant="outlined" style={{ border: "2px solid" }}>
+        <Button
+          variant="outlined"
+          style={{ border: "2px solid" }}
+          component={Link}
+          to="/subscription/package"
+        >
           Click Here
         </Button>
-      </Grid>
+      </SpaceBetweenCenterAlignedGrid>
     </Grid>
   );
 };
