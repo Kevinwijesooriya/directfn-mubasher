@@ -1,59 +1,61 @@
 import React from "react";
 import {
   Button,
-  Divider,
   Grid,
   Typography,
-  List,
-  ListItem,
-  ListItemAvatar,
-  Box,
   Stack,
   Container,
+  IconButton,
 } from "@mui/material";
 import dfnLogo from "../../assets/images/dfnLogo.png";
-import CurrentSubscriptionsTable from "../../components/CurrentSubscriptionsTable";
-import PreviousSubscriptionsTable from "../../components/PreviousSubscriptionsTable";
+import CurrentSubscriptionsTable from "../Subscription/components/CurrentSubscriptionsTable";
+import PreviousSubscriptionsTable from "../Subscription/components/PreviousSubscriptionsTable";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
+import { Link } from "react-router-dom";
+import LanguageIcon from "@mui/icons-material/Language";
+import {
+  CenterAlignedGrid,
+  SpaceBetweenCenterAlignedGrid,
+} from "../Subscription/styles";
 
 const Landing = () => {
+  const userDetails = {
+    name: { en: "Mr. Mohammed Saleh", ar: "السيد محمد الصالح" },
+    username: "Mohsaleh123",
+  };
+  const [language, setLanguage] = React.useState("ar");
+  const handleToggleLanguage = () => {
+    if (language === "en") {
+      setLanguage("ar");
+    } else {
+      setLanguage("en");
+    }
+  };
   return (
-    <Container>
+    <Container dir={language === "en" ? "ltr" : "rtl"}>
+      <IconButton color="primary" onClick={handleToggleLanguage}>
+        <LanguageIcon />
+        {language}
+      </IconButton>
       <Grid container sx={{ height: "100vh" }} spacing={4}>
-        <Grid
-          item
-          xs={12}
-          md={4}
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-        >
+        <CenterAlignedGrid item xs={12} md={4}>
           <img alt="dfnLogo" src={dfnLogo} width={300} />
-        </Grid>
+        </CenterAlignedGrid>
 
-        <Grid
-          item
-          xs={12}
-          md={8}
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <Typography variant="h3">Hello</Typography>
-          <Typography variant="h4">Mr. Mohammed Saleh</Typography>
-          <Typography variant="h5">Mohsaleh123</Typography>
-        </Grid>
+        <CenterAlignedGrid item xs={12} md={8}>
+          <Typography variant="h3">
+            {language === "en" ? "Hello" : "أهلا و سهلا"}
+          </Typography>
+          <Typography variant="h4">
+            {language === "en" ? userDetails.name.en : userDetails.name.ar}
+          </Typography>
+          <Typography variant="h5">{userDetails.username}</Typography>
+        </CenterAlignedGrid>
 
-        <Grid
+        <SpaceBetweenCenterAlignedGrid
           item
           xs={12}
           md={4}
-          display="flex"
-          flexDirection="column"
-          justifyContent="space-between"
-          alignItems="center"
           sx={{ height: "60vh" }}
         >
           <Stack spacing={3}>
@@ -61,61 +63,80 @@ const Landing = () => {
               startIcon={<KeyboardDoubleArrowRightIcon />}
               variant="contained"
             >
-              Main Page
+              {language === "en" ? "Main Page" : "ا ل ر ئ يسية"}
+            </Button>
+            <Button
+              variant="contained"
+              startIcon={<KeyboardDoubleArrowRightIcon />}
+              component={Link}
+              to="/subscription/market"
+            >
+              {language === "en" ? "Renew Subscription" : "تجديد الاشت ر اك"}
             </Button>
             <Button
               variant="contained"
               startIcon={<KeyboardDoubleArrowRightIcon />}
             >
-              Renew Subscription
+              {language === "en" ? "Upgrade Subscription" : "ت رقية الاشت ر اك"}
             </Button>
             <Button
               variant="contained"
               startIcon={<KeyboardDoubleArrowRightIcon />}
             >
-              Upgrade Subscription
+              {language === "en"
+                ? "Change User Information"
+                : "تغي ي ر معلومات ا لمستخدم"}
             </Button>
             <Button
               variant="contained"
               startIcon={<KeyboardDoubleArrowRightIcon />}
             >
-              Change User Information
+              {language === "en" ? "Change Password" : "تغي ي ر كلمة ا لسر ر"}
             </Button>
             <Button
               variant="contained"
               startIcon={<KeyboardDoubleArrowRightIcon />}
             >
-              Change Password
+              {language === "en"
+                ? "Upload Invoice File"
+                : "تحميل صورة ا لحوا لة"}
             </Button>
             <Button
               variant="contained"
               startIcon={<KeyboardDoubleArrowRightIcon />}
             >
-              Upload Invoice File
-            </Button>
-            <Button
-              variant="contained"
-              startIcon={<KeyboardDoubleArrowRightIcon />}
-            >
-              Logout
+              {language === "en" ? "Logout" : "خروج"}
             </Button>
           </Stack>
-        </Grid>
+        </SpaceBetweenCenterAlignedGrid>
 
         <Grid item xs={12} md={8}>
           <Stack
             direction="row"
-            spacing={2}
+            spacing={language === "en" ? 2 : 0}
             justifyContent="flex-end"
             alignItems="center"
           >
-            <Button variant="outlined">REDEEM POINTS</Button>
-            <Button variant="outlined">1750 POINTS</Button>
+            <Button variant="outlined" sx={{ marginLeft: 2 }}>
+              {language === "en" ? "REDEEM POINTS" : "است بدل ا ل نقاط"}
+            </Button>
+            <Button variant="outlined">
+              1750 {language === "en" ? " POINTS" : " نقطة"}
+            </Button>
           </Stack>
-          <Typography variant="h5">Current Subscription</Typography>
-          <CurrentSubscriptionsTable />
-          <Typography variant="h5">Previous Subscription</Typography>
-          <PreviousSubscriptionsTable />
+          <Typography variant="h5">
+            {" "}
+            {language === "en"
+              ? "Current Subscription"
+              : "الاشت ر اكات ا لحا ل ية"}
+          </Typography>
+          <CurrentSubscriptionsTable language={language} />
+          <Typography variant="h5">
+            {language === "en"
+              ? "Previous Subscription"
+              : "الاشت ر اكات ا لسا بقة"}
+          </Typography>
+          <PreviousSubscriptionsTable language={language} />
         </Grid>
       </Grid>
     </Container>
