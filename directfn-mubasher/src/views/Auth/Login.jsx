@@ -5,6 +5,8 @@ import {
   Container,
   FormControlLabel,
   FormLabel,
+  Grid,
+  IconButton,
   Stack,
   TextField,
   Typography,
@@ -13,15 +15,49 @@ import React from "react";
 import dfnLogo from "../../assets/images/dfnLogo.png";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import { Link } from "react-router-dom";
+import LanguageIcon from "@mui/icons-material/Language";
 
 const Login = () => {
+  const [language, setLanguage] = React.useState("en");
+  const handleToggleLanguage = () => {
+    if (language === "en") {
+      setLanguage("ar");
+    } else {
+      setLanguage("en");
+    }
+  };
   return (
-    <Container>
-      <Stack direction={"row"} justifyContent="space-between" paddingY={4}>
-        <Typography variant="h4">Login to Account</Typography>
-        <img alt="dfnLogo" src={dfnLogo} width={250} />
-      </Stack>
-      <Stack direction={"column"} alignItems="center" paddingY={4}>
+    <Container dir={language === "en" ? "ltr" : "rtl"}>
+      <IconButton color="primary" onClick={handleToggleLanguage}>
+        <LanguageIcon />
+        {language === "en" ? "ar" : "en"}
+      </IconButton>
+      <Grid
+        container
+        display="flex"
+        flexDirection="row"
+        alignItems="center"
+        justifyContent="center"
+        // sx={{ background: "red" }}
+        paddingY={4}
+      >
+        <Grid item xs={12} md={6}>
+          <Typography variant="h4">
+            {language === "en" ? "Login to Account" : "الدخول الى الحساب"}
+          </Typography>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          md={6}
+          display="flex"
+          alignItems="center"
+          justifyContent="flex-end"
+        >
+          <img alt="dfnLogo" src={dfnLogo} width={250} />
+        </Grid>
+      </Grid>
+      <Grid container direction={"column"} alignItems="center" paddingY={4}>
         <Box sx={{ border: 1, borderRadius: 1, p: 2, paddingX: 8, m: 2 }}>
           <Stack
             direction={"column"}
@@ -35,7 +71,9 @@ const Login = () => {
               paddingBottom={4}
               spacing={8}
             >
-              <Typography variant="subtitle2">USERNAME</Typography>
+              <Typography variant="subtitle2">
+                {language === "en" ? "USERNAME" : "اسم ا لمستخدم"}
+              </Typography>
               <TextField
                 placeholder="hello@DirectFN.com.sa"
                 variant="outlined"
@@ -48,7 +86,9 @@ const Login = () => {
               paddingY={4}
               spacing={8}
             >
-              <Typography variant="subtitle2">PASSWORD</Typography>
+              <Typography variant="subtitle2">
+                {language === "en" ? "PASSWORD" : "كلمة ا لسر ر"}
+              </Typography>
               <TextField
                 placeholder="******"
                 type="password"
@@ -65,15 +105,25 @@ const Login = () => {
             <FormControlLabel
               labelPlacement="start"
               control={<Checkbox defaultChecked />}
-              label="Remember Me"
+              label={language === "en" ? "Remember Me" : "تذكر ني"}
             />
 
-            <FormLabel component={Link} to="#" sx={{ textDecoration: "none" }}>
-              Forgot Password ?
+            <FormLabel
+              component={Link}
+              to="/auth/forgot-password"
+              sx={{ textDecoration: "none" }}
+            >
+              {language === "en"
+                ? "Forgot Password ?"
+                : "است رجاع معلومات ا لدخول"}
             </FormLabel>
 
-            <FormLabel component={Link} to="#" sx={{ textDecoration: "none" }}>
-              Create Account
+            <FormLabel
+              component={Link}
+              to="/auth/registration"
+              sx={{ textDecoration: "none" }}
+            >
+              {language === "en" ? "Create Account" : "ا نشا ء حساب جديد"}
             </FormLabel>
           </Stack>
         </Box>
@@ -84,9 +134,9 @@ const Login = () => {
           to="/main/landing"
           fullWidth={false}
         >
-          Sign in
+          {language === "en" ? "Sign in" : "الدخول"}
         </Button>
-      </Stack>
+      </Grid>
     </Container>
   );
 };
