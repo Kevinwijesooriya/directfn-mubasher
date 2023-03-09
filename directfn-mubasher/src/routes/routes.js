@@ -2,7 +2,10 @@ import {
     createBrowserRouter
 } from "react-router-dom";
 import App from "../App";
+import ForgotPassword from "../views/Auth/ForgotPassword";
+import ForgotUsername from "../views/Auth/ForgotUsername";
 import Login from "../views/Auth/Login";
+import Registration from "../views/Auth/Registration";
 import Landing from "../views/Main/Landing";
 import MarketSelector from "../views/Subscription/MarketSelector";
 import PackageSelector from "../views/Subscription/PackageSelector";
@@ -33,6 +36,18 @@ const router = createBrowserRouter([
     {
         path: "auth/login",
         element: <Login />,
+    },
+    {
+        path: "auth/forgot-password",
+        element: <ForgotPassword />,
+    },
+    {
+        path: "auth/forgot-username",
+        element: <ForgotUsername />,
+    },
+    {
+        path: "auth/registration",
+        element: <Registration />,
     },
     {
         path: "main/landing",
