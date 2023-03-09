@@ -23,7 +23,7 @@ const Landing = () => {
     name: { en: "Mr. Mohammed Saleh", ar: "السيد محمد الصالح" },
     username: "Mohsaleh123",
   };
-  const [language, setLanguage] = React.useState("ar");
+  const [language, setLanguage] = React.useState("en");
   const handleToggleLanguage = () => {
     if (language === "en") {
       setLanguage("ar");
@@ -35,7 +35,7 @@ const Landing = () => {
     <Container dir={language === "en" ? "ltr" : "rtl"}>
       <IconButton color="primary" onClick={handleToggleLanguage}>
         <LanguageIcon />
-        {language}
+        {language === "en" ? "ar" : "en"}
       </IconButton>
       <Grid container sx={{ height: "100vh" }} spacing={4}>
         <CenterAlignedGrid item xs={12} md={4}>
@@ -104,6 +104,8 @@ const Landing = () => {
             <Button
               variant="contained"
               startIcon={<KeyboardDoubleArrowRightIcon />}
+              component={Link}
+              to="/auth/login"
             >
               {language === "en" ? "Logout" : "خروج"}
             </Button>
